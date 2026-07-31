@@ -362,18 +362,30 @@ public class Lab2P2_CristianTercero {
             System.out.println("El villano gano");
         }
     }
-    
-    public static void derrota(Ciudad ciudad, Superheroe heroe){
+
+    public static void derrota(Ciudad ciudad, Superheroe heroe) {
         historial.add("Ciudad: " + ciudad.getNombre() + " - Superheroe: " + heroe.getApodo() + " - Derrotado por: " + ciudad.getNombreVillano());
     }
-    
-    public static void aumentarNivelVillano(Ciudad ciudad){
+
+    public static void aumentarNivelVillano(Ciudad ciudad) {
         double nuevoNivel = ciudad.getNivelVillano() * 1.10;
         if (nuevoNivel > 100) {
-            nuevoNivel = 100;            
+            nuevoNivel = 100;
         }
-        
-        ciudad.
+
+        ciudad.setNivelVillano(nuevoNivel);
+    }
+
+    public static boolean idCiudadExiste(int id) {
+        for (int i = 0; i < ciudades.size(); i++) {
+            if (ciudades.get(i).getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean idSuperheroeExiste(){
         
     }
 
