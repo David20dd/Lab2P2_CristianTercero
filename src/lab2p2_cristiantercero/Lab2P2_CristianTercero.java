@@ -142,8 +142,95 @@ public class Lab2P2_CristianTercero {
             double nivel = habilidades[0] * 0.20 + habilidades[1] * 0.15 + habilidades[2] * 0.10 + habilidades[3] * 0.30 + habilidades[4] * 0.25;
             superheroes.add(new Superheroe(id, apodo, nombre, descripcion, vuelo, habilidades, nivel));
             System.out.println("Superheroe agregado");
+            System.out.println("Nivel: " + redondear(nivel) * "%");
+        }
+    }
 
+    public static void menuListar() {
+        System.out.println("Ciudades: ");
+        System.out.println("Superheroes: ");
+        System.out.println("Historial: ");
+
+        int opcion = entero("Opcion: ");
+
+        switch (opcion) {
+
+            case 1:
+                listarCiudades();
+                break;
+
+            case 2:
+                listarSuperheroes();
+                break;
+
+            case 3:
+                listarHistorial();
+                break;
+
+            default:
+                System.out.println("Opcion invalida");
+        }
+    }
+
+    public static void listarCiudades() {
+        if (ciudades.isEmpty()) {
+            System.out.println("No hay ciudades");
+            return;
         }
 
+        for (int i = 0; i < ciudades.size(); i++) {
+            Ciudad ciudad = ciudades.get(i);
+            String vuelo = "NO";
+
+            if (ciudad.getVuelo()) {
+                vuelo = "SI";
+
+            }
+
+            System.out.println((i + 1) + ". " + ciudad.getNombre() + "--" + vuelo + "--" + ciudad.getNombreVillano()
+                    + "--" + ciudad.getNivelVillano() + "%");
+        }
     }
+
+    public static void listarSuperheroes() {
+        if (superheroes.isEmpty()) {
+            System.out.println("No hay superheroes");
+            return;
+        }
+
+        for (int i = 0; i < superheroes.size(); i++) {
+            Superheroe heroe = superheroes.get(i);
+            int[] h = heroe.getHabilidades();
+            String nombre = heroe.getNombre();
+            String vuelo = "NO";
+
+            if (heroe.getNivel() > 80) {
+                nombre = "CLASIFICADO";
+            }
+
+            if (heroe.getCapacidadVuelo()) {
+                vuelo = "SI";
+            }
+
+            System.out.println((i + 1) + ". " + heroe.getApodo() + " -- " + nombre + " -- " + vuelo + " -- " + "{ Defensa: " + h[0] + ", Agilidad: " + h[1] + ", Carisma: " + h[2]
+                    + ", Inteligencia" + h[3] + ", Ataque" + h[4] + " } --" + redondear(heroe.getNivel()) + "%");
+        }
+    }
+
+    public static void listarHistorial() {
+        if (historial.isEmpty()) {
+            System.out.println("No hay simulaciones");
+
+            return;
+        }
+
+        for (int i = 0; i < historial.size(); i++) {
+            System.out.println((i + 1) + ". " + historial.get(i));
+        }
+    }
+    
+    public static void modificarVillano(){
+        
+    }
+
 }
