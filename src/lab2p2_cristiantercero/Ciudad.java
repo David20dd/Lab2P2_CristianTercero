@@ -16,13 +16,12 @@ public class Ciudad {
     private boolean vuelo;
     private double nivelVillano;
 
-    public Ciudad(int id, String nombre, String nombreVillano, boolean vuelo, double nivelVillano) {
+    public Ciudad(int id, String nombre, boolean vuelo, String nombreVillano, double nivelVillano) {
         this.id = id;
         this.nombre = nombre;
         this.nombreVillano = nombreVillano;
         this.vuelo = vuelo;
         this.nivelVillano = nivelVillano;
-
     }
 
     public int getId() {
