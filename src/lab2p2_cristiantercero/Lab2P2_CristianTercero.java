@@ -228,9 +228,97 @@ public class Lab2P2_CristianTercero {
             System.out.println((i + 1) + ". " + historial.get(i));
         }
     }
-    
-    public static void modificarVillano(){
-        
+
+    public static void modificarVillano() {
+        if (ciudades.isEmpty()) {
+            System.out.println("No hay ciudades");
+
+            return;
+        }
+
+        listar(ciudades);
+
+        int posicion = entero("Seleccione una ciudad: ") - 1;
+        if (!posicionCiudadValida(posicion)) {
+            System.out.println("Posicion incorrecta");
+            return;
+        }
+
+        Ciudad ciudad = ciudades.get(posicion);
+        System.out.println("Nuevo nombre del villano: ");
+        ciudad.setNombreVillano(leer.nextLine());
+        ciudad.setNivelVillano(nivelValido("Nuevo nivel [1-100]: ", 1));
+
+        System.out.println("Villano modificado");
+    }
+
+    public static void modificarSuperheroe() {
+        if (superheroes.isEmpty()) {
+            System.out.println("No hay superheroes");
+            return;
+        }
+
+        listarSuperheroes();
+
+        int posicion = entero("Seleccione un superheroe: ") - 1;
+        if (!posicionSuperHeroeValida(posicion)) {
+            System.out.println("Posicion incorrecta");
+            return;
+        }
+
+        Superheroe heroe = superheroes.get(posicion);
+        System.out.println("Nuevo apodo: ");
+        heroe.setApodo(leer.nextLine());
+        System.out.println("Nuevo nombre civil: ");
+        heroe.setNombre(leer.nextLine());
+        System.out.println("Nueva descripcion: ");
+        heroe.setDescripcion(leer.nextLine());
+        heroe.setCapacidadVuelo(respuestaBoolean("Puede volar?"));
+        System.out.println("Superheroe modificado");
+    }
+
+    public static void eliminarCiudad() {
+        if (ciudades.isEmpty()) {
+            System.out.println("No hay ciudades");
+            return;
+        }
+
+        listar(ciudades);
+
+        int posicion = entero("Seleccione una opcion: ") - 1;
+        if (!posicionCiudadValida(posicion)) {
+            System.out.println("Posicion incorrecta");
+            return;
+        }
+
+        if (ciudades.get(posicion).getNivelVillano() < 60) {
+            ciudades.remove(posicion);
+            System.out.println("Ciudad eliminada");
+        } else {
+            System.out.println("No se puede eliminar porque el villano tiene un nivel de 60 o mayor");
+        }
+    }
+
+    public static void eliminarSuperheroe() {
+        if (superheroes.isEmpty()) {
+            System.out.println("No hay superheroes");
+            return;
+        }
+
+        listarSuperheroes();
+
+        int posicion = entero("Seleccione un superheroe: ") - 1;
+        if (!posicionSuperHeroeValida(posicion)) {
+            System.out.println("Posicion incorrecta");
+            return;
+        }
+
+        if (superheroes.get(posicion).getNivel() <= 80) {
+            superheroes.remove(posicion);
+            System.out.println("Superheroe eliminado");
+        } else {
+            System.out.println("No se puede eliminar porque su nivel es mayor a 80");
+        }
     }
 
 }
