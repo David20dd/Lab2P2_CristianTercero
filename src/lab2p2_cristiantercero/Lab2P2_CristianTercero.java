@@ -321,4 +321,60 @@ public class Lab2P2_CristianTercero {
         }
     }
 
+    public static void simulacion() {
+        if (ciudades.isEmpty()) || superheroes.isEmpty() {
+            System.out.println("Debe registrar una ciudad y un superheroe");
+            return;
+        }
+
+        listarSuperheroes();
+
+        int posicionHeroe = entero("Seleccione un heroe: ") - 1;
+        if (!posicionSuperHeroeValida(posicionHeroe)) {
+            System.out.println("Superheroe incorrecto");
+            return;
+        }
+
+        listarCiudades();
+
+        int posicionCiudad = entero("Seleccione una ciudad: ") - 1;
+        if (!posicionCiudadValida(posicionCiudad)) {
+            System.out.println("Ciudad incorrecta");
+            return;
+        }
+
+        Superheroe heroe = superheroes.get(posicionHeroe);
+        Ciudad ciudad = ciudades.get(posicionCiudad);
+        if (ciudad.getVuelo() && !heroe.getCapacidadVuelo()) {
+            derrota(ciudad, heroe);
+
+            aumentarNivelVillano(ciudad);
+            System.out.println("Derrota, el superheroe no pudo volar");
+
+        } else if (heroe.getNivel() > ciudad.getNivelVillano()) {
+            historial.add("Ciudad: " + ciudad.getNombre() + " -" + "Villano: " + ciudad.getNombreVillano() + " - Derrotado por: " + heroe.getApodo());
+            ciudades.remove(posicionCiudad);
+            System.out.println("Victoria, la ciudad fue liberada");
+
+        } else {
+            derrota(ciudad, heroe);
+            aumentarNivelVillano(ciudad);
+            System.out.println("El villano gano");
+        }
+    }
+    
+    public static void derrota(Ciudad ciudad, Superheroe heroe){
+        historial.add("Ciudad: " + ciudad.getNombre() + " - Superheroe: " + heroe.getApodo() + " - Derrotado por: " + ciudad.getNombreVillano());
+    }
+    
+    public static void aumentarNivelVillano(Ciudad ciudad){
+        double nuevoNivel = ciudad.getNivelVillano() * 1.10;
+        if (nuevoNivel > 100) {
+            nuevoNivel = 100;            
+        }
+        
+        ciudad.
+        
+    }
+
 }
