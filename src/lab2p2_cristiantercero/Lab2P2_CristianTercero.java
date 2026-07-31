@@ -247,7 +247,7 @@ public class Lab2P2_CristianTercero {
         Ciudad ciudad = ciudades.get(posicion);
         System.out.println("Nuevo nombre del villano: ");
         ciudad.setNombreVillano(leer.nextLine());
-        ciudad.setNivelVillano(nivelValido("Nuevo nivel [1-100]: ", 1));
+        ciudad.setNivelVillano(nivelVillano("Nuevo nivel [1-100]: ", 1));
 
         System.out.println("Villano modificado");
     }
@@ -322,7 +322,7 @@ public class Lab2P2_CristianTercero {
     }
 
     public static void simulacion() {
-        if (ciudades.isEmpty()) || superheroes.isEmpty() {
+        if (ciudades.isEmpty() || superheroes.isEmpty()) {
             System.out.println("Debe registrar una ciudad y un superheroe");
             return;
         }
@@ -384,9 +384,75 @@ public class Lab2P2_CristianTercero {
         }
         return false;
     }
-    
-    public static boolean idSuperheroeExiste(){
-        
+
+    public static boolean idSuperheroeExiste(int id) {
+        for (int i = 0; i < superheroes.size(); i++) {
+            if (superheroes.get(i).getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean posicionCiudadValida(int posicion) {
+        return posicion >= 0 && posicion <= ciudades.size();
+    }
+
+    public static boolean posicionSuperHeroeValida(int posicion) {
+        return posicion >= 0 && posicion <= superheroes.size();
+    }
+
+    public static boolean respuestaBoolean(String pregunta) {
+        int respuesta;
+
+        do {
+            System.out.println(pregunta);
+            System.out.println("1. Si");
+            System.out.println("2. No");
+            respuesta = entero("Respuesta: ");
+        } while (respuesta != 1 && respuesta != 2);
+
+        return respuesta == 1;
+
+    }
+
+    public static double nivelVillano(String mensaje, int minimo) {
+        double nivel;
+
+        do {
+            nivel = decimal(mensaje);
+            if (nivel < minimo || nivel > 100) {
+                System.out.println("Debe estar entre " + minimo + " y 100");
+            }
+        } while (nivel < minimo || nivel > 100);
+        return nivel;
+    }
+
+    public static int entero(String mensaje) {
+
+        while (true) {
+            try {
+                System.out.print(mensaje);
+                return Integer.parseInt(leer.nextLine());
+            } catch (NumberFormatException error) {
+                System.out.println("Ingrese un numero entero: ");
+            }
+        }
+    }
+
+    public static double decimal(String mensaje) {
+        while (true) {
+            try {
+                System.out.print(mensaje);
+                return Double.parseDouble(leer.nextLine());
+            } catch (NumberFormatException error) {
+                System.out.println("Ingrese un numero valido: ");
+            }
+        }
+    }
+
+    public static double redondear(double numero) {
+        return Math.round(numero * 100.0) / 100.0;
     }
 
 }
